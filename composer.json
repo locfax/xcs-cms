@@ -1,10 +1,11 @@
 {
-  "name": "locphp/xcs-demo",
+  "name": "locphp/xcs-cms",
   "description": "PHP Web Framework Xcs CMS",
   "keywords": [
     "framework",
     "php",
-    "xcs"
+    "xcs",
+    "cms"
   ],
   "homepage": "https://github.com/locphp/xcs-cms",
   "license": "MIT",
