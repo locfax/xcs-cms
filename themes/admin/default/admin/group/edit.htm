@@ -1,0 +1,47 @@
+{subtemplate ajax/header}
+
+<ol class="breadcrumb">
+  <li>{$tip}</li>
+</ol>
+
+<div class="con_scoll">
+<form method="post" name="form1" id="form1" action="{$posturl}" class="form-inline" role="form">
+  <input name="group_id" type="hidden" value="{$row['group_id']}"/>
+  <table class="table table-condensed">
+    <tr>
+      <th width="60">组 名</th>
+      <td><input name="group_text" type="text" class="form-control" style="width: 200px;" value="{$row['group_text']}" data-tip="组名" data-type="string,0,60"/></td>
+    </tr>
+    <tr>
+      <th width="60">KEY</th>
+      <td>
+      <div class="input-group">
+      <input name="group_name" type="text" class="form-control" style="width: 200px;" value="{$row['group_name']}" data-tip="组KEY" data-type="string,0,60"/>
+      <label class="input-group-addon">必须为字母组成</label>
+      </div>
+      </td>
+    </tr>
+    <tr>
+      <th>描 述</th>
+      <td><input name="depict" type="text" class="form-control" id="tel" style="width: 200px;" value="{$row['depict']}" data-tip="描述" data-type-"string,0,100"/></td>
+    </tr>
+    <tr>
+      <th>状 态</th>
+      <td>
+        <input type="radio" name="available" id="available1" value="1" {if $row['available']==1}checked{/if}/> 有效 &nbsp;
+        <input type="radio" name="available" id="available2" value="0" {if $row['available']==0}checked{/if}/> 无效
+      </td>
+    </tr>
+    <tfoot>
+      <tr>
+      <td> </td>
+      <td>
+        <button type="button" class="btn btn-primary btn-sm" data-loading-text="<i class='icon-refresh icon-spin'></i> 执行中..." onclick="theForm.submit(this, 'form1', '', true);">提交保存</button>
+      </td>
+      </tr>
+    </tfoot>
+  </table>
+</form>
+</div>
+
+{subtemplate ajax/footer}

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8" />
+<title>no</title>
+{script script/header}
+</head>
+<body>
+<nav class="navbar-fixed-top">
+  <ol class="breadcrumb">
+    <li>信息管理 / 信息分类</li>
+    <span class="pull-right"><a class="btn btn-success radius" style="width: 20px; height: 20px; padding:0;" href="javascript:location.replace(location.href);" title="刷新"><i class="icon-refresh"></i></a></span>
+  </ol>
+</nav>
+
+<div class="wrap">
+  <div id="col_left" class="col-md-6 col-left"> {echo $category->div_list($rowset, 0, 'category', 'onclick="return theList.edit(0,this,0)" class="btn btn-default btn-xs"', 'catid','upid','name')} </div>
+  <div id="col_right" class="col-md-6 col-right"> </div>
+</div>
+{script script/formpage}
+</body>
+</html>

@@ -1,0 +1,64 @@
+{subtemplate ajax/header}
+
+<ol class="breadcrumb">
+  <li>角色绑定权限 {$currole['role_name']}</li>
+</ol>
+<style type="text/css">
+#allPermissions {}
+#allPermissions h2 { display: block; width: 100%; font-size: 14px; font-weight: bold; float: left; margin: 10px 0;}
+#allPermissions ul { float: left;}
+#allPermissions ul li { width: 180px; float: left; margin: 0 5px 5px 0;}
+.OMover { background-color: #FFFF99;}
+.Select { background-color: #d9edf7; display: inline-block; width: 100px;}
+</style>
+<div class="con_scoll">
+<form id="form1" name="form1" action="{$posturl}" method="post">
+<input name="role_id" type="hidden" value="{$currole['role_id']}"/>
+<table class="table table-condensed">
+  <tr>
+    <td>
+      <div id="allPermissions">
+        {loop $limits $row1}
+        <h2 title="{$row1['auth_group_name']}">{$row1['aliasname']}</h2>
+        <ul>
+          {loop $row1['childs'] $row2}
+          <li limit_id="{$row2['auth_id']}">
+            <input class="ckbox" name="limit[{$row2['auth_id']}]" type="checkbox" id="limit_{$row2['auth_id']}"/>
+            <label for="limit_{$row2['auth_id']}" limit-id="{$row2['auth_id']}" title="{$row2['auth_name']}"> {if $row2['aliasname']}{$row2['aliasname']}{else}{=str_replace('controller_','',$row2['auth_name'])}{/if}</label>
+          </li>
+          {/loop}
+        </ul>
+        {/loop}
+        <div class="cb"> </div>
+      </div>
+    </td>
+  </tr>
+  <tr><td> <button type="button" class="btn btn-primary btn-sm" data-loading-text="<i class='icon-refresh icon-spin'></i> 执行中..." onclick="theForm.submit(this, 'form1', '', true);">提交保存</button> </td></tr>
+</table>
+</form>
+</div>
+
+<script type="text/javascript">
+// 在网页载入时加载
+$(function () {
+  // 全部角色列表鼠标划过动作
+  $("#allPermissions li").hover(function () {
+    $(this).addClass("OMover");
+  }, function () {
+    $(this).removeClass("OMover");
+  });
+
+  // 选中
+  _selectself();
+
+});
+
+function _selectself() {
+  {loop $curroles $row}
+  $("#allPermissions label[limit-id='{$row['auth_id']}']").click().addClass('Select');
+  //$("#allPermissions li[limit_id='{$row['auth_id']}'] option[value='{$row['auth_id']}']").attr("selected","selected").click();
+  {/loop}
+}
+</script>
+
+{subtemplate ajax/footer}

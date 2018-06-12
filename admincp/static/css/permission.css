@@ -1,0 +1,98 @@
+@charset "UTF-8";
+
+/*-------------------------------------------------------------------------*/
+/*  Permission CSS 权限列表样式 */
+/*-------------------------------------------------------------------------*/
+html, body { padding: 0; margin: 0;}
+
+body, td, textarea, select { font-size: 12px; font-family: "Helvetica Neue",Helvetica,"Hiragino Sans GB","Microsoft Yahei",STHeiTi,sans-serif; color: #333;  word-break: break-all;}
+
+/* 包含从文件中已删除的控制器方法的层  包含从文件中新增的控制器方法的层 */
+#removeFromFile, #newInFile {
+    width: 650px;
+    border: 1px dashed #0aa;
+    margin-top: 10px;
+    padding: 10px;
+}
+
+#removeFromFile {
+    border: 2px dashed #F00;
+    background: #FFF url(images/remove.gif) no-repeat top left
+}
+
+#newInFile ul, #newInFile li,
+#removeFromFile ul, #removeFromFile li {
+    list-style-type: none;
+    margin: 0 0 0 30px;
+}
+
+#newInFile strong, #removeFromFile strong {
+    margin: 0 0 0 60px;
+}
+
+#newInFile h1, #removeFromFile h1 {
+    font-size: 16px;
+}
+
+#newInFile h2, #removeFromFile h2 {
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 18px
+}
+
+/* 表单 */
+input {
+    font-size: 12px;
+    border: 1px #AAA solid;
+    margin: 2px;
+    padding: 5px;
+}
+
+#updategroup label {
+    font-size: 14px;
+}
+
+/* 权限列表 */
+#permissionList {
+    width: 650px;
+    padding: 15px;
+}
+
+#permissionList strong {
+    font-size: 16px;
+    padding: 0 0 15px 0;
+    margin-bottom: 10px;
+    display: block;
+    border-bottom: 2px dashed #aaa
+}
+
+#permissionList h1 {
+    font-size: 16px;
+}
+
+#permissionList h2 {
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 18px
+}
+
+#permissionList .tip {
+    margin-left: 15px;
+    font-size: 14px;
+    font-weight: normal;
+    color: #FF0000;
+}
+
+.hide {
+    display: none;
+}
+
+.green {
+    color: #0066CC;
+}
+
+.OMover {
+    background-color: #FFFF99;
+}
+
+/*-------------------------------------------------------------------------*/

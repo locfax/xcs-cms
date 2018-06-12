@@ -1,0 +1,27 @@
+{subtemplate ajax/header}
+
+<div class="con_scoll">
+<form method="post" name="form1" id="form1" action="{$posturl}" class="form-horizontal" role="form">
+<input name="id" type="hidden" value="{$row['id']}"/>
+<table class="table table-condensed">
+<tr>
+  <th width="50">标题</th>
+  <td><input name="title" type="text" class="form-control" value="{$row['title']}" data-tip="标题" data-type="string,1,120" style="width: 500px;" /></td>
+</tr>
+<tr>
+  <th>内容</th>
+  <td><textarea name="content" class="form-control richtext-clone" style="width:90%;" rows="30">{=stripslashes($row['content'])}</textarea></td>
+</tr>
+<tfoot>
+  <tr>
+  <td> </td>
+  <td>
+    <button type="button" class="btn btn-primary btn-sm" data-loading-text="<i class='icon-refresh icon-spin'></i> 执行中..." onclick="theForm.submit(this, 'form1', '', true);">提交保存</button>
+  </td>
+  </tr>
+</tfoot>
+</table>
+</form>
+</div>
+
+{subtemplate ajax/footer}

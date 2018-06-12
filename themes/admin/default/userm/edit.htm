@@ -1,0 +1,177 @@
+{subtemplate ajax/header}
+
+<script type="text/javascript">
+
+  function getMobinfo(uid, mob, callback){
+    $('#mobtip').html('');
+    $('#mobloc').val('');
+    $.ajax({
+      url: '{url userm/checkmob}&uid='+uid+'&mob='+ encodeURIComponent($.trim(mob))+'&ret=json',
+      dataType: 'json',
+      error: function (data) {
+        downup_tips(data, 3);
+      },
+      success: function (data) {
+        if (typeof callback == 'function') {
+          callback(data);
+        } else {
+          downup_tips(data, 3);
+        }
+      },
+      cache: false
+    });
+  }
+
+  function setMobinfo(res) {
+    var mobtip = $('#mobtip');
+    if(res.errcode==1) {
+      mobtip.html(res.errmsg);
+    }else{
+      mobtip.html(res.errmsg);
+    }
+    $('#setmob').val(res.data.mob);
+    $('#mobloc').val(res.data.addr);
+  }
+</script>
+
+<ol class="breadcrumb">
+  <li>$tip</li>
+</ol>
+
+<div class="con_scoll">
+<form method="post" name="form1" id="form1" action="{$posturl}" class="form-inline" role="form">
+<input type="hidden" name="id" value="{$row['uid']}" />
+<table class="table table-condensed">
+  <tr>
+    <td colspan="2"><strong>基本信息</strong></td>
+  </tr>
+  <tr>
+    <th width="60">用户</th>
+    <td><input name="data[username]" type="text" class="form-control" style="width: 150px;" value="{$row['username']}" data-tip="用户" data-type="string,1,15" placeholder="必须" /></td>
+  </tr>
+  <tr>
+    <th>密 码</th>
+    <td>
+      {if $row['uid']}
+      <div class="input-group">
+        <input name="password" type="text" class="form-control" id="password" style="width: 150px;" value="" data-tip="密码" data-type="string,3,15" data-empty="Y"/>
+        <label class="input-group-addon" style="color:red">不修改请留空</label>
+      </div>
+      {else}
+        <input name="password" type="text" class="form-control" id="password" style="width: 150px;" value="" data-tip="密码" data-type="string,3,15" />
+      {/if}
+    </td>
+  </tr>
+  {if $row['uid']}
+  <tr>
+    <th>SAlT</th>
+    <td>{$row['salt']}</td>
+  </tr>
+  {/if}
+  <tr>
+    <th>级别</th>
+    <td>
+      <select name="data[groupid]" style="width: 150px;" class="form-control">
+        {loop $groups $group}
+        <option value="{$group['groupid']}" {if $row['groupid']==$group['groupid']}selected{/if}>{$group['name']}</option>
+        {/loop}
+      </select>
+    </td>
+  </tr>
+  <tr>
+    <th>状态</th>
+    <td>
+      <input type="radio" name="data[status]" id="status1" value="1" {if $row['status']==1}checked{/if}/> 有效 &nbsp;
+      <input type="radio" name="data[status]" id="status2" value="0" {if $row['status']==0}checked{/if}/> 无效
+    </td>
+  </tr>
+  <tr>
+    <th>备注</th>
+    <td>
+      <textarea name="data[memo]" class="form-control" style="width: 250px;" rows="2">{$row['memo']}</textarea>
+    </td>
+  </tr>
+  <tr><td colspan="2"><strong>联系信息</strong></td></tr>
+  <tr>
+    <th>姓名</th>
+    <td><input name="data[name]" type="text" class="form-control" style="width: 150px;" value="{$row['name']}" data-tip="姓名" data-type="string,1,15" data-empty="Y" /></td>
+  </tr>
+  <tr>
+    <th>昵称</th>
+    <td>{$row['nickname']}</td>
+  </tr>
+  <tr>
+    <th>头像</th>
+    <td>
+      <img src="{=headimgadmin($row)}?r={=mt_rand()}" width="100" height="100" />
+    </td>
+  </tr>
+  <tr>
+    <th>性别</th>
+    <td>
+      <select name="data[gender]" style="width: 60px;" class="form-control">
+        <option value="1" {if $row['gender']==1}selected{/if}>男</option>
+        <option value="2" {if $row['gender']==2}selected{/if}>女</option>
+        <option value="0" {if $row['gender']==0}selected{/if}>保密</option>
+      </select>
+    </td>
+  </tr>
+  <tr>
+    <th>手机</th>
+    <td>
+      <div class="input-group">
+        <input name="data[mob]" id="setmob" type="text" class="form-control" style="width: 150px;" value="{$row['mob']}" onblur="getMobinfo({$row['uid']}, this.value, setMobinfo)" data-tip="手机" data-type="string,8,50" data-empty="Y" />
+          <label class="input-group-addon">归属</label>
+          <input name="data[mobloc]" id="mobloc" type="text" class="form-control" style="width: 150px;" value="{$row['mobloc']}" maxlength="50" />
+      </div>
+      <label id="mobtip" style="color:#FF0000;padding:5px 0 0 10px;"></label>
+   </td>
+  </tr>
+  <tr>
+    <th>座机</th>
+    <td>
+      <input name="data[phone]" id="setmob" type="text" class="form-control" style="width: 150px;" value="{$row['phone']}" />
+   </td>
+  </tr>
+  <tr>
+    <th>Email</th>
+    <td><input name="data[email]" type="text" class="form-control" style="width: 150px;" value="{$row['email']}" /></td>
+  </tr>
+  {if $row['uid']>0}
+  <tr><td colspan="2"><strong>其它信息</strong></td></tr>
+  <tr>
+    <th width="60">openid</th>
+    <td>{$row['openid']}</td>
+  </tr>
+  <tr>
+    <th>关注</th>
+    <td>
+    {=status2str($row['subscribe'])}
+    </td>
+  </tr>
+  <tr>
+    <th>access token</th>
+    <td>{$row['access_token']}</td>
+  </tr>
+  <tr>
+    <th>创建于</th>
+    <td>{date $row['created']}</td>
+  </tr>
+  <tr>
+    <th>更新于</th>
+    <td>{date $row['updated']}</td>
+  </tr>
+  {/if}
+  <tfoot>
+  <tr>
+    <th> </th>
+    <td>
+      <button type="button" class="btn btn-primary btn-sm" data-loading-text="<i class='icon-refresh icon-spin'></i> 执行中..." onclick="theForm.submit(this, 'form1', '', true);">提交保存</button>
+    </td>
+  </tr>
+  </tfoot>
+</table>
+</form>
+</div>
+
+{subtemplate ajax/footer}

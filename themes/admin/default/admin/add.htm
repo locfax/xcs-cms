@@ -1,0 +1,53 @@
+{subtemplate ajax/header}
+<ol class="breadcrumb">
+  <li>创建管理员</li>
+</ol>
+
+<div class="con_scoll">
+<form method="post" name="form1" id="form1" action="{url admin/save}" role="form">
+  <table class="table table-condensed">
+    <tr>
+      <th width="100">用户名 * </th>
+      <td><input name="username" type="text" class="form-control" id="username" style="width: 200px;" value="{$row['username']}" data-tip="用户名" data-type="string,3,15"/></td>
+    </tr>
+    <tr>
+      <th>密 码 *</th>
+      <td><input name="password" type="text" class="form-control" id="password" style="width: 200px;" data-tip="登录密码" data-type="string,3,15"/></td>
+    </tr>
+    <tr>
+      <th>EMAIL *</th>
+      <td><input name="email" type="text" class="form-control" id="email" style="width: 200px;" value="{$row['email']}" data-tip="电子邮件" data-type="email"/></td>
+    </tr>
+    <tr>
+      <th>管理组 *</th>
+      <td>
+        <select name="groupid" id="groupid" style="width:150px;" class="form-control">
+        {loop $groups $group}
+          <option value="{$group['group_id']}" {if $row['groupid']==$group['group_id']}selected{/if}>{$group['group_name']}({$group['depict']})</option>
+        {/loop}
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <th>状态 *</th>
+      <td>
+        <input name="status" type="radio" id="radio" value="1" checked="checked"/> 有效
+        <input type="radio" name="status" id="radio2" value="0"/> 无效
+      </td>
+    </tr>
+    <tr>
+      <th>备注</th>
+      <td><textarea name="memo" rows="3" id="memo" style="width:200px;" class="form-control">{$row['memo']}</textarea></td>
+    </tr>
+    <tfoot>
+    <tr>
+	  <td> </td>
+    <td>
+      <button type="button" class="btn btn-primary btn-sm" data-loading-text="<i class='icon-refresh icon-spin'></i> 执行中..." onclick="theForm.submit(this, 'form1', '', true);" >提交保存</button>
+    </td>
+    </tr>
+    </tfoot>
+  </table>
+</form>
+</div>
+{subtemplate ajax/footer}

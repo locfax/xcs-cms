@@ -1,0 +1,37 @@
+<script type="text/javascript">
+$(function () {
+
+if($('#chkall').length > 0) {
+	var parms = $('#chkall').val().split('_'), checkboxs = $('#'+parms[0]).find("input[name^='" + parms[1] + "[]']"), len = checkboxs.size(), count=0;
+	$('#chkall').on('click', function(){
+		theList.checkAll(document.forms[parms[0]], parms[1], parms[2], parms[3], parms[4]);
+	});
+	checkboxs.each(function(){
+		$(this).on('click', function() {
+			if($(this).is(':checked')) {
+				//$('#_'+parms[1]+'_'+$(this).val()).addClass('checked');
+				$('#'+parms[3]+'_'+$(this).val()).addClass(parms[4]);
+				//处理chkall
+				count=0;
+				checkboxs.each(function(){
+					if($(this).is(':checked')){
+						count++;
+					}
+				});
+				if(len <= count){
+					$('#'+parms[2]).prop('checked', true);
+					//$('#_chkall').addClass('checked');
+				}
+			} else {
+				//$('#_'+parms[1]+'_'+$(this).val()).removeClass('checked');
+				$('#'+parms[3]+'_'+$(this).val()).removeClass(parms[4]);
+				//处理chkall
+				$('#'+parms[2]).prop('checked', false);
+				//$('#_'+parms[2]).removeClass('checked');
+			}
+		});
+	});
+}
+
+});
+</script>

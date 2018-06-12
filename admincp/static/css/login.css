@@ -1,0 +1,105 @@
+html, body {
+    padding: 0;
+    margin: 0;
+	background: #fbfbfb !important;
+    font-size: 12px;
+	line-height: 18px;
+	font-family: "Helvetica Neue",Helvetica,"Hiragino Sans GB","Microsoft Yahei",STHeiTi,sans-serif;
+}
+
+div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, pre, form, fieldset, p, table, th, td {
+    font-family: "Helvetica Neue",Helvetica,"Hiragino Sans GB","Microsoft Yahei",STHeiTi,sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+#login {
+    width: 300px;
+    margin: 200px auto;
+}
+
+#login .message {
+    margin-bottom:1px;
+    border: 1px solid #ffebe8;
+    padding: 10px;
+    border-radius: 3px;
+    background-color: #ffebe8;
+    height: 20px;
+    line-height: 20px;
+}
+
+#loginform {
+    padding: 26px 24px 5px;
+    font-weight: normal;
+    border-radius: 3px;
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    box-shadow: rgba(200, 200, 200, 0.7) 0px 4px 10px -1px;
+}
+
+.form-item {
+    margin: 20px auto 20px auto;
+    position: relative;
+}
+
+.item-tip {
+    position: absolute;
+    color: #999;
+    top: 10px;
+    left: 12px;
+    background-color: #FFF;
+    padding: 0px 3px;
+    font-size: 14px;
+    transition: all 0.2s linear 0s;
+}
+
+.item-tip-focus {
+	top:-8px;
+	font-size:14px;
+	color:#5188a6;
+}
+
+.form-input {
+	border-radius: 3px;
+	width: 90%;
+	padding: 9px 10px;
+	border: 1px solid #DCDCDC;
+	font-size: 14px;
+    transition: border-color 0.15s ease-in-out 0s;
+}
+
+.form-input-focus {
+	border-color:#5188a6;
+	outline: none;
+}
+
+.login-btn {
+    background-color: #5a98de;
+    outline: none;
+    border-radius: 3px;
+    display: block;
+}
+
+.login-btn:hover {
+    background-color: #78B3E2;
+}
+
+.submit {
+    width: 100%;
+    font-size: 18px;
+    color: #fff;
+    cursor: pointer;
+    border:0;
+    line-height: 39px;
+    height: 40px;
+    background: none;
+    outline: none;
+}
+
+.copyright {
+    width:100%;
+    font-weight: normal;
+    text-align: right;
+    margin-bottom: 0;
+    margin-top: 0;
+}

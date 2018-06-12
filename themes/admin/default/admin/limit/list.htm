@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8" />
+<title>no</title>
+{script script/header}
+<link rel="stylesheet" type="text/css" href="static/css/permission.css" />
+<script type="text/javascript">
+// 在网页载入时加载
+$(function () {
+    // 保存到数据库按钮变色
+    var selectstr = '';
+    $("input:button, input:submit").hover(function () {
+        $(this).addClass("OMover");
+    }, function () {
+        $(this).removeClass("OMover");
+    });
+    // 在鼠标悬停情况下显示编辑提示
+    $(".controller").hover(function () {
+        selectstr = ".controller[group_id='" + $(this).attr("group_id") + "']";
+        if ($(selectstr + " .editbox").hasClass('hide') || $(selectstr + " .editbox").html()=='') {
+            $(this).addClass("OMover");
+            $(selectstr + " .tip").text(" ← 点击编辑");
+        }
+    }, function () {
+        $(this).removeClass("OMover");
+        $(selectstr + " .tip").text("");
+    });
+    $(".action").hover(function () {
+        selectstr = ".action[limit_id='" + $(this).attr("limit_id") + "']";
+        if ($(selectstr + " .editbox").hasClass('hide')  || $(selectstr + " .editbox").html()=='') {
+            $(this).addClass("OMover");
+            $(selectstr + " .tip").text(" ← 点击编辑");
+        }
+    }, function () {
+        $(this).removeClass("OMover");
+        $(selectstr + " .tip").text("");
+    });
+    // 点击行时显示编辑表单
+    $(".controller").click(function () {
+        $(this).removeClass("OMover");
+        selectstr = ".controller[group_id='" + $(this).attr("group_id") + "']";
+        if ($(selectstr + " .editbox").html() == '') {
+            $(selectstr + " .tip").text("");
+            _removeForms();
+            $("#updategroup").appendTo(selectstr + " .editbox");
+            // 预填写
+            $("#group_aliasname").val($(selectstr + " .group_aliasname").text());
+            $("#limit_group_id").val($(selectstr).attr("group_id"));
+            $(".need_login[value='" + $(this).attr("need_login") + "']").attr("checked", "checked");
+            $(selectstr + " .editbox").removeClass('hide');
+        }else{
+            $(selectstr + " .tip").text("");
+            $(selectstr + " .editbox").removeClass('hide');
+        }
+    });
+    $(".action").click(function () {
+        $(this).removeClass("OMover");
+        selectstr = ".action[limit_id='" + $(this).attr("limit_id") + "']";
+        if ($(selectstr + " .editbox").html() == '') {
+            $(selectstr + " .tip").text("");
+            _removeForms();
+            $("#updatelimit").appendTo(selectstr + " .editbox");
+            // 预填写
+            $("#limit_aliasname").val($(selectstr + " .limit_aliasname").text());
+            $("#limit_id").val($(selectstr).attr("limit_id"));
+            $(selectstr + " .editbox").removeClass('hide');
+        }else{
+            $(selectstr + " .tip").text("");
+            $(selectstr + " .editbox").removeClass('hide');
+        }
+    });
+    // 当取消按钮被点击
+    $(".removeModifyForm").bind("click", function (event) {
+        $(this).parent().parent().addClass('hide');
+        event.stopPropagation();
+    });
+
+});
+
+function _removeForms() {
+    $("#updategroup").appendTo("#div_update");
+    $("#updatelimit").appendTo("#div_update");
+}
+
+function _submitForm(obj) {
+    obj.parentNode.submit();
+}
+</script>
+</head>
+<body>
+<nav class="navbar-fixed-top">
+  <ol class="breadcrumb">
+    <li><a href="{url admin/list}">管理列表</a></li>
+    <li><a href="{url group/list}">管理员组</a></li>
+    <li><a href="{url role/list}">角色管理</a></li>
+    <li><a href="{url limit/list}" style="color:#ff0000">权限列表</a></li>
+    <span class="pull-right"><a class="btn btn-success radius" style="width: 20px; height: 20px; padding:0;" href="javascript:location.replace(location.href);" title="刷新"><i class="icon-refresh"></i></a></span>
+  </ol>
+</nav>
+
+<div class="wrap">
+
+<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="listtable">
+  <tr>
+     <td align="left" style="vertical-align:top;">
+      <div id="permissionList"> <strong>权限列表</strong>
+      <a href="{url limit/addctl}" target="edit" style="font-size: 14px;">创建控制器</a> <a href="{url limit/allctl}" target="edit" style="font-size: 14px; color:red;" onClick="return confirm('确认同步?')">同步控制器</a>
+        {loop $newgroups $row1}
+        <h1 class="controller" style="margin-top: 10px; font-size: 14px;" group_id="{$row1['auth_group_id']}" need_login="{$row1['need_login']}"> <span class="group_aliasname">{$row1['aliasname']}</span> <span class="groupname">({$row1['auth_group_name']})</span> <span class="tip"></span> <span class="editbox"></span> </h1>
+        <span class="edit"><a href="{=url('limit/addact', array('cid' => $row1['auth_group_id']))}" target="edit" style="color:blue">创建动作</a></span>
+        {loop $row1['childs'] $row2}
+        <h2 class="action" style="margin-top: 5px;" limit_id="{$row2['auth_id']}">&nbsp;&nbsp;\-- <span class="limit_aliasname">{$row2['aliasname']}</span> <span class="pername">({$row2['auth_name']})</span> <span class="tip"></span> <span class="editbox hide"></span> </h2>
+        {/loop}
+        {/loop}
+      </div>
+    </td>
+    <td valign="top">
+        <iframe src="about:blank" id="edit" name="edit" width="100%" height="600" frameborder="0"></iframe>
+    </td>
+  </tr>
+</table>
+
+</div>
+
+<div id="div_update" class="hide">
+  <form id="updategroup" action="{url limit/ctlaliasupdate}" method="post">
+    <input id="limit_group_id" name="limit_group_id" type="hidden"/>
+    <label class="green">别名：<input name="aliasname" id="group_aliasname" type="text" size="40"/></label>
+    <label class="green"><input class="need_login" name="need_login" type="radio" value="0"/>公共 / </label>
+    <label class="green"><input class="need_login" name="need_login" type="radio" value="1"/>私有/</label>
+    <label class="green"><input class="need_login" name="need_login" type="radio" value="-1"/>删除</label>
+    <input type="button" value="更新" class="submit" onClick="javascript:_submitForm(this);"/>
+    <input type='button' value='取消' class='removeModifyForm'/>
+  </form>
+  <form id="updatelimit" action="{url limit/actaliasupdate}" method="post">
+    <input id="limit_id" name="limit_id" type="hidden"/>
+    <label class="green">别名：<input name="aliasname" id="limit_aliasname" type="text" size="50"/></label>
+    <label class="green"><input class="need_login" name="delthis" type="checkbox" value="-1" class="checkbox"/>删除</label>
+    <input type="button" value="更新" class="submit" onClick="javascript:_submitForm(this);"/>
+    <input type='button' value='取消' class='removeModifyForm'/>
+  </form>
+</div>
+</body>
+</html>

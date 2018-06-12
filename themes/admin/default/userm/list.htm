@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8" />
+<title>no</title>
+{script script/header}
+</head>
+<body>
+<nav class="navbar-fixed-top">
+  <ol class="breadcrumb">
+    <li>用户管理 / 用户列表</li>
+    <span class="pull-right"><a class="btn btn-success radius" style="width: 20px; height: 20px; padding:0;" href="javascript:location.replace(location.href);" title="刷新"><i class="icon-refresh"></i></a></span>
+  </ol>
+</nav>
+
+<div class="wrap">
+
+<form id="search" name="search" method="get" action="{url usern/list}" class="form-inline" role="form">
+<input type="hidden" name="c" value="userm" />
+<input type="hidden" name="a" value="list" />
+<table class="table table-condensed">
+  <tr>
+    <td>
+    <div class="input-group">
+      <select name="searchtype" class="form-control" style="width:80px;">
+        <option value="mob" {if $searchtype=='mob'}selected="selected"{/if}>手机</option>
+        <option value="username" {if $searchtype=='username'}selected="selected"{/if}>用户名</option>
+        <option value="email" {if $searchtype=='email'}selected="selected"{/if}>Email</option>
+      </select>
+      <input name="searchkey" type="text" value="{$searchkey}" ondblclick="javascript:this.value = ''" title="双击清空" class="form-control" style="width:200px;" />
+      <label class="input-group-btn"><input type="submit" id="dosearch" value="查找" class="btn btn-default"/> </label>
+    </div>
+     <a href="{url userm/add}" class="btn btn-default" onclick="return theList.edit(0, this, 'info')" ><i class='icon-plus'></i> 创建</a>
+    </td>
+    <td> </td>
+  </tr>
+</table>
+</form>
+
+<div id="col_left" class="col-md-6 col-left">
+<form name="listform" id="listform" action="{url userm/list}" method="post" role="form">
+<table class="table table-striped table-hover">
+  <thead>
+  <tr>
+    <th width="30"><input type="checkbox" name="chkall" id="chkall" value="listform_uid_chkall_data_info" /></th>
+    <th>用户名</th>
+    <th>Email</th>
+    <th>状态</th>
+    <th >操作</th>
+  </tr>
+  </thead>
+  {loop $rowset $row}
+  <tr id="data_{$row['uid']}">
+    <td><input type="checkbox" name="uid[]" value="{$row['uid']}" class="checkbox" /></td>
+    <td><a href="{=url('userm/edit', array('id'=>$row['uid']))}" onclick="return theList.edit('data_{$row['uid']}', this, 'info')">$row['username']</a></td>
+    <td>{$row['email']}</td>
+    <td>{=status2str($row['status'])}</td>
+    <td>
+      <a href="{=url('userm/edit', array('id'=>$row['uid']))}" onclick="return theList.edit('data_{$row['uid']}', this, 'info')">编辑</a>&nbsp;&nbsp;
+      <a href="{=url('userm/remove',array('id'=>$row['uid']))}" onclick="return theList.confirm(this, '确认删除 ‘{$row['username']}’ 么?')">删除</a>
+    </td>
+  </tr>
+  {/loop}
+  {if $pagebar}
+  <tfoot>
+  <tr>
+    <td colspan="5">{$pagebar}</td>
+  </tr>
+  </tfoot>
+  {/if}
+</table>
+</form>
+</div>
+
+<div id="col_right" class="col-md-6 col-right"></div>
+
+</div>
+{script script/listpage}
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name='robots' content='noindex,nofollow'/>
+<title>{APPNAME}</title>
+<link type="text/css" rel="stylesheet" href="static/css/login.css"/>
+<script type="text/javascript" src="static/js/lib/jquery.1.8.3.js"></script>
+<script type="text/javascript" src="static/js/lib/tool.js"></script>
+<script type="text/javascript">
+addEvent = function (func) {
+	if (typeof loginfunc !== 'function') {
+		loginfunc = func;
+	} else {
+		var oldonload = loginfunc;
+		loginfunc = function () {
+			oldonload();
+			func();
+		}
+	}
+};
+
+function shake(id, a, d) {
+	c = a.shift();
+	$('#'+id).css({left: c + 'px'});
+	if (a.length > 0) {
+		setTimeout(function () {
+			shake(id, a, d);
+		}, d);
+	} else {
+		try {
+			$('#'+id).css({position: 'static'});
+			attempt_focus();
+		} catch (e) {}
+	}
+}
+
+addEvent(function () {
+	var p = new Array(15, 30, 15, 0, -15, -30, -15, 0);
+	p = p.concat(p.concat(p));
+	var i = document.forms[0].id;
+	$('#'+i).css({position :'relative'});
+	shake(i, p, 20);
+});
+</script>
+</head>
+<body>
+<div id="login">
+  <div class="message" id="message-tip" style="display:none"></div>
+  <form name="loginform" id="loginform" action="" method="post" onsubmit="return false;">
+  <div class="form-item">
+	<div class="item-tip">用户</div>
+	<input type="text" name="login" id="user_login" class="form-input" value=""  size="20" tabindex="1" autocomplete="off"/>
+  </div>
+  <div class="form-item">
+	<div class="item-tip">密码</div>
+	<input type="password" name="pass" id="user_pass" class="form-input" value="" size="20" tabindex="2" autocomplete="off"/>
+  </div>
+  <div class="form-item">
+  	<a href="javascript:;" class="login-btn" hidefocus="true">
+	  <input type="submit" name="wp-submit" id="wp-submit" class="submit" value="登录" tabindex="3" onclick="javascript:login_send(this);" />
+	 </a>
+  </div>
+  <div class="form-item copyright">
+  	{config siteicp}
+  </div>
+  </form>
+</div>
+
+<script type="text/javascript">
+{if !empty($info)}
+$('#message-tip').html("{$info['message']}").show();
+{/if}
+
+function login_send(o){
+	var msgobj = $('#message-tip');
+	var login_user = $('#user_login').val();
+	var login_pass = $('#user_pass').val();
+	var url = "{url login/logining}";
+
+	msgobj.hide();
+	if(!login_user) {
+		msgobj.html('用户名不能为空!');
+		msgobj.show();
+		loginfunc();
+		return;
+	}
+	if(!login_pass){
+		msgobj.html('密码不能为空!');
+		msgobj.show();
+		loginfunc();
+		return;
+	}
+
+	$.ajax({
+    url: url,
+    type: 'POST',
+    data: {login: login_user, pass: login_pass},
+    dataType: 'json',
+    beforeSend: function() {
+    	msgobj.html('');
+      $(o).val('登录中...').attr("disabled", true);
+    },
+    error: function(xhr, ts, err) {
+      if (xhr.status == 200) {
+        msgobj.html('数据错误:' + ts);
+        if (err) {
+          //alert(err);
+        }
+      } else {
+        msgobj.html('网络错误!' + ts);
+      }
+      msgobj.show();
+      loginfunc();
+      $(o).val('登录').attr("disabled", false);
+    },
+    success: function(data) {
+        msgobj.html(data.errmsg);
+        if(0 != data.errcode) {
+        	msgobj.show();
+        	loginfunc();
+        	$(o).val('登录').attr("disabled", false);
+      	}else{
+      		location.href="{url console/index}";
+      	}
+    },
+    complete: function(xhr, ts) {
+
+    },
+    cache: false
+  });
+}
+
+function attempt_focus(id) {
+	setTimeout(function () {
+		try {
+			d = $('#user_login');
+			d.focus();
+			//d.select();
+		} catch (e) {
+		}
+	}, 200);
+}
+attempt_focus();
+
+login_reg_input($('.form-input'));
+</script>
+</body>
+</html>

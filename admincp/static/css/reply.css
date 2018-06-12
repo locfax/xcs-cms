@@ -1,0 +1,61 @@
+
+.item .reply-edit-cover { background-color: #FFFFFF; height: auto; padding-bottom: 10px;}
+.item .reply-edit-cover .detail { padding:5px; position: relative; overflow: hidden;}
+.item .reply-edit-cover .detail .pull-right { margin-top: 5px;}
+.item .reply-edit-cover .upload-view { width: 100%;}
+.item .reply-edit-cover .upload-view img { margin-top: 5px; margin-bottom: 5px; width: 100%;}
+.item .reply-edit-cover .reply-edit-cover-upload { margin: 0; padding: 0;}
+.item .reply-edit-cover .detail .ke-upload-file { width: 47px; height: 25px; overflow: hidden; border: 0; font-size: 60px; margin: 0; padding: 0; opacity:0; position: absolute; left: 0; top: 0; z-index: 100; filter:alpha(opacity=0);}
+.item .reply-edit-cover .detail .ke-button-common{ margin: 0; padding: 0; line-height:23px; border:0;  font-size:12px; background: none repeat scroll 0 0 transparent;}
+.item .reply-news-list { background-color: #FFF; border:1px solid #DDDDDD; position: relative;}
+.item .reply-news-list-detail .title { font-size: 14px;}
+.item .reply-news-list .reply-news-list-cover { background-color: #FCFCFC; float: right; width: 90px; margin-right: 28px; height: 90px; overflow: hidden; }
+.item .reply-news-list .reply-news-list-cover img { width: 90px; height: 90px; }
+.item .reply-news-list .reply-news-list-detail {
+    background-color: #FCFCFC;
+    font-family: "Helvetica Neue",Helvetica,"Hiragino Sans GB","Microsoft Yahei",STHeiTi,sans-serif;
+    padding: 4px 0 4px 6px;
+    text-shadow: none;
+    top: 5px;
+    left: 3px;
+    width: 260px;
+    overflow: hidden;
+}
+.item .reply-news-list .content { display: none;}
+.item .reply-news-list-first { background-color: #FFF; color: #333333; position: relative;}
+.item .reply-news-list-first .reply-news-list-cover { float: none; width: 360px; height: 200px; margin: 0; padding: 0; overflow: hidden; }
+.item .reply-news-list-first .reply-news-list-cover img {width: 360px; height: 200px; }
+.item .reply-news-list-first .reply-news-list-detail {
+    background-color: rgba(0, 0, 0, 0.3);
+    bottom: 3px;
+    left: 5px;
+    right: 40px;
+    color: #FFFFFF;
+    font-family: "Helvetica Neue",Helvetica,"Hiragino Sans GB","Microsoft Yahei",STHeiTi,sans-serif;
+    position: absolute;
+    text-shadow: none;
+    padding: 5px;
+    height: 100px;
+    overflow: hidden;
+}
+.item .reply-news-list-first .reply-news-list-detail .pull-right { position: absolute; right: 1px; bottom: 1px;}
+.item .reply-news-list-first .content { display: block;}
+.item .reply-news-edit-button { margin-bottom: 5px; text-align: right;}
+
+.item .reply-news-list-move {
+    top: 3px;
+    right: 5px;
+    position: absolute;
+    background-color: #FFF;
+    width: 25px;
+    height: 21px;
+    line-height: 20px;
+    color: #000;
+    text-align: center;
+    z-index: 200;
+    cursor: move;
+    border:1px solid #DDDDDD;
+    border-radius: 3px;
+}
+
+.holderCss{ border-radius: 3px; border:1px solid #DDDDDD; height: 120px; margin-bottom: 5px; background-color: #D9EDF7; }

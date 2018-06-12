@@ -1,0 +1,86 @@
+{subtemplate ajax/header}
+<ol class="breadcrumb">
+  <li>更新管理员 - [{$row['username']}]</li>
+</ol>
+
+<div class="con_scoll">
+  <form method="post" name="form1" id="form1" action="{url admin/update}" class="form-inline" role="form">
+  <input type="hidden" name="uid" value="{$row['uid']}"/>
+  <table class="table table-condensed">
+    <tr>
+      <th width="60">用户名</th>
+      <td><input name="username" type="text" class="form-control" id="username" style="width: 200px;" value="{$row['username']}" data-tip="用户名" data-type="string,1,15"/></td>
+    </tr>
+    <tr>
+      <th>密 码</th>
+      <td>
+      <div class="input-group">
+      <input name="password" type="text" class="form-control" id="password" style="width: 200px;" value="" data-tip="密码" data-type="string,3,15" data-empty="Y"/>
+      <label class="input-group-addon" style="color:red">不修改请留空</label>
+      </div>
+      </td>
+    </tr>
+    <tr>
+      <th>EMAIL</th>
+      <td><input name="email" type="text" class="form-control" id="email" style="width: 200px;" value="{$row['email']}" data-tip="电子邮件" data-type="email"/></td>
+    </tr>
+    <tr>
+      <th>管理组</th>
+      <td>
+        <select name="groupid" id="groupid" style="width: 150px;" class="form-control">
+        {loop $groups $group}
+          <option value="{$group['group_id']}" {if $row['groupid']==$group['group_id']} selected{/if}>{$group['group_name']}({$group['depict']})</option>
+        {/loop}
+        </select>
+        <input name="old_group_id" type="hidden" id="old_group_id" value="{$row['groupid']}"/>
+      </td>
+    </tr>
+    <tr>
+      <th>状 态</th>
+      <td>
+        <select name="status" id="status" style="width: 150px;" class="form-control">
+          <option value="1" {if $row['status']==1}selected{/if}>有效</option>
+          <option value="0" {if $row['status']==0}selected{/if}>无效</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <th>备注</th>
+      <td><textarea name="memo" rows="3" id="memo" style="width:200px;" class="form-control">{$row['memo']}</textarea></td>
+    </tr>
+	<tr>
+    <td colspan="2">
+		<table class="table table-condensed">
+			<tr>
+			  <th width="60">注册于</th>
+			  <td><p class="form-control-static">{date $row['created']}</p></td>
+			</tr>
+      <tr>
+        <th>更新于</th>
+        <td><p class="form-control-static">{date $row['updated']}</p></td>
+      </tr>
+			<tr>
+			  <th>注册IP</th>
+			  <td><p class="form-control-static">{$stats['regip']}</p></td>
+			</tr>
+			<tr>
+			  <th>登录于</th>
+			  <td><p class="form-control-static">{date $stats['lastactivity']}</p></td>
+			</tr>
+			<tr>
+			  <th>登录IP</th>
+			  <td><p class="form-control-static">{$stats['lastip']}</p></td>
+			</tr>
+		  </table>
+    </td>
+  </tr>
+	<tr>
+	<td> </td>
+	<td>
+		<button type="button" data-loading-text="<i class='icon-refresh icon-spin'></i> 执行中..." onclick="theForm.submit(this, 'form1', '', true);" class="btn btn-primary btn-sm" >提交保存</button>
+	</td>
+  </tr>
+  </table>
+</form>
+</div>
+{subtemplate ajax/footer}

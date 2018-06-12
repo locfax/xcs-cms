@@ -1,0 +1,45 @@
+{subtemplate ajax/header}
+
+<ol class="breadcrumb">
+  <li>{$tip}</li>
+</ol>
+
+<div class="con_scoll">
+<form method="post" name="form1" id="form1" action="{$posturl}" class="form-inline" role="form">
+  <input name="role_id" type="hidden" value="{$row['role_id']}"/>
+  <table class="table table-condensed">
+    <tr>
+      <th width="60">角色名</th>
+      <td><input name="role_text" type="text" class="form-control" style="width: 200px;" value="{$row['role_text']}" data-tip="角色名" data-type="string,0,60"/></td>
+    </tr>
+    <tr>
+      <th width="60">KEY</th>
+      <td>
+      <div class="input-group">
+      <input name="role_name" type="text" class="form-control" style="width: 200px;" value="{$row['role_name']}" data-tip="角色KEY" data-type="string,0,60"/>
+      <label class="input-group-addon">必须为字母组成</label>
+      </div>
+      </td>
+    </tr>
+    <tr>
+      <th>描 述</th>
+      <td><input name="depict" type="text" class="form-control" id="tel" style="width: 200px;" value="{$row['depict']}" /></td>
+    </tr>
+    <tr>
+      <th>状 态</th>
+      <td>
+        <input type="radio" name="available" id="available1" value="1" {if $row['available']==1}checked{/if}/>有效 &nbsp;
+        <input type="radio" name="available" id="available2" value="0" {if $row['available']==0}checked{/if}/>无效
+      </td>
+    </tr>
+    <tfoot>
+    <tr>
+      <td>&nbsp;</td>
+      <td><button type="button" class="btn btn-primary btn-sm" data-loading-text="<i class='icon-refresh icon-spin'></i> 执行中..." onclick="theForm.submit(this, 'form1', '', true);">提交保存</button></td>
+    </tr>
+    </tfoot>
+  </table>
+</form>
+</div>
+
+{subtemplate ajax/footer}

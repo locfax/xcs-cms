@@ -1,0 +1,33 @@
+{subtemplate ajax/header}
+
+<ol class="breadcrumb">
+  <li>{$tip}</li>
+</ol>
+
+<div class="con_scoll">
+<form method="post" name="form1" id="form1" action="{$posturl}" class="form-horizontal" role="form">
+<input type="hidden" name="groupid" value="{$row['groupid']}"/>
+  <table class="table table-condensed">
+    <tr>
+      <th width="60">名称</th>
+      <td><input name="name" type="text" class="form-control" id="name" style="width: 100px;" value="{$row['name']}" data-tip="名称" data-type="string,0,20"/></td>
+    </tr>
+    <tr>
+      <th>金额</th>
+      <td><input name="balance" type="text" class="form-control" id="balance" style="width: 100px;" value="{$row['balance']}" data-tip="金额" data-type="integer,0"/></td>
+    </tr>
+    <tr>
+      <th>积分</th>
+      <td><input name="scores" type="text" class="form-control" id="scores" style="width: 100px;" value="{$row['scores']}" data-tip="积分" data-type="integer,0"/></td>
+    </tr>
+    <tr>
+    <th> </th>
+    <td>
+    <button type="button" class="btn btn-primary btn-sm" data-loading-text="<i class='icon-refresh icon-spin'></i> 执行中..." onclick="theForm.submit(this, 'form1', '', true);">提交保存</button>
+    </td>
+  </tr>
+  </table>
+</form>
+</div>
+
+{subtemplate ajax/footer}

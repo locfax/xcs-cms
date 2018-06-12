@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8" />
+{script script/header}
+</head>
+<body>
+<nav class="navbar-fixed-top">
+  <ol class="breadcrumb">
+    <li>信息管理 / 媒体文件</li>
+    <span class="pull-right"><a class="btn btn-success radius" style="width: 20px; height: 20px; padding:0;" href="javascript:location.replace(location.href);" title="刷新"><i class="icon-refresh"></i></a></span>
+  </ol>
+</nav>
+
+<div class="wrap">
+  <form id="formsearch" name="formsearch" method="get" action="{url media/list}" class="form-inline" role="form">
+  <input type="hidden" name="c" value="media" />
+  <input type="hidden" name="a" value="list" />
+  <table class="table table-condensed">
+    <tr>
+      <td align="left">
+      <div class="input-group">
+        <span class="input-group-addon">描述</span>
+        <input name="kw" type="text" value="{$searchkey}" ondblclick="javascript:this.value = ''" class="form-control" style="width:150px;" title="双击清空" />
+        <span class="input-group-btn"><input name="sb" type="submit" id="sb" value="搜索" class="btn btn-default"/> </span>
+        </div>
+        <a href="{url media/add}" class="btn btn-default" onclick="return theList.openDrawer(0, this, 'info', true)"><i class='icon-plus'></i> 上传文件</a>
+      </td>
+      <td align="right"> </td>
+    </tr>
+  </table>
+  </form>
+  <div id="col_left" class="col-left">
+  <form name="listform" id="listform" method="post" action="{url media/list}" role="form">
+  <table class="table table-striped table-hover">
+    <thead>
+    <tr>
+      <th width="30"><input name="chkall" type="checkbox" id="chkall" value="listform_tid_chkall_data_info" /></th>
+      <th>描述</th>
+      <th>idtype</th>
+      <th>itemid</th>
+      <th>储存位置</th>
+      <th>路径</th>
+      <th>日期</th>
+      <th>操作</th>
+    </tr>
+    </thead>
+    {loop $rowset $row}
+    <tr id="data_{$row['aid']}">
+      <td><input name="tid[]" type="checkbox" value="{$row['aid']}" class="checkbox" /></td>
+      <td><a href="{=url('media/edit', array('aid'=>$row['aid']))}" onclick="return theList.openDrawer('data_{$row[aid]}', this, 'info', true)">{$row['digest']}</a></td>
+      <td>{$row['idtype']}</td>
+      <td>{$row['itemid']}</td>
+      <td>{=getini("file/$row[filesite]/name")}</td>
+      <td>{$row['filepath']}</td>
+      <td>{date $row['created']}</td>
+      <td>
+        <a href="{=url('media/edit', array('aid'=>$row['aid']))}" onclick="return theList.openDrawer('data_{$row[aid]}', this, 'info', true)">编辑</a>&nbsp;
+        <a href="{=url('media/del', array('aid'=>$row['aid']))}" onclick="return theList.confirm(this, '确认删除吗？T:{$row[digest]}');">删除</a>
+      </td>
+    </tr>
+    {/loop}
+    <tfoot>
+    <tr>
+      <td colspan="8">{$pagebar}</td>
+    </tr>
+    </tfoot>
+  </table>
+  </form>
+  </div>
+
+</div>
+{script script/listpage}
+</body>
+</html>

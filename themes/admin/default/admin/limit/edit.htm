@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8" />
+<title>no</title>
+{script script/header}
+</head>
+<body>
+<nav class="navbar-fixed-top">
+  <ol class="breadcrumb">
+    <li>{$tip}</li>
+  </ol>
+</nav>
+
+<div class="wrap">
+<form method="post" name="form1" id="form1" action="{$posturl}" class="form-horizontal" role="form">
+<input name="id" type="hidden" id="id" value="{$row['id']}"/>
+<table class="table table-condensed">
+  <tr>
+    <th width="100">控制器 *</th>
+    <td><input name="controller" type="text" class="form-control" id="controller" style="width: 200px;" value="{$row['controller']}" {if 'controller'==$row['disable']}disabled=true{/if}/></td>
+  </tr>
+  <tr>
+    <th>动作 *</th>
+    <td><input name="action" type="text" class="form-control" id="action" style="width: 200px;" value="{$row['action']}" {if 'action'==$row['disable']}disabled=true{/if}/></td>
+  </tr>
+  <tr>
+    <th valign="top">描述 *</th>
+    <td><input name="aliasname" type="text" class="form-control" id="aliasname" style="width: 200px;" value="{$row['aliasname']}" /></td>
+  </tr>
+  <tr>
+    <th> </th>
+    <td>
+      <button type="button" class="btn btn-primary btn-sm" data-loading-text="<i class='icon-refresh icon-spin'></i> 执行中..." onclick="theForm.submit(this, 'form1', '', true);">提交保存</button> &nbsp;
+      <a href="javascript:;" onClick="javascript:location.href = '{url limit/list}';" class="btn btn-default btn-sm">返回</a>
+    </td>
+  </tr>
+</table>
+</form>
+</div>
+{script script/formpage}
+</body>
+</html>

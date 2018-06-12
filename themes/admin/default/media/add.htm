@@ -1,0 +1,49 @@
+{subtemplate ajax/header}
+
+<div class="con_scoll">
+<form name="form1" id="form1" action="{$posturl}" method="post" enctype="multipart/form-data" class="form-inline" role="form">
+<table class="table table-condensed">
+<tr>
+  <th width="60">描述</th>
+  <td><input name="digest" type="text" class="form-control" value="{$row['digest']}" style="width: 50%;" /></td>
+</tr>
+<tr>
+  <th>idtype</th>
+  <td><input name="type" type="text" class="form-control" value="{$row['idtype']}" style="width: 200px;" /></td>
+</tr>
+<tr>
+  <th>itemid</th>
+  <td><input name="id" type="text" class="form-control" value="{$row['itemid']}" style="width: 200px;" /></td>
+</tr>
+<tr>
+  <th>目录</th>
+  <td><input name="dir" type="text" class="form-control" value="{$row['dir']}" style="width: 200px;" /></td>
+</tr>
+<tr>
+  <th>文件</th>
+  <td><input name="imgFile" type="file" class="form-control" style="width: 200px;" /></td>
+</tr>
+<tr>
+  <th>hash</th>
+  <td><input name="hash" type="text" class="form-control" value="{$row['hash']}" style="width: 200px;" /></td>
+</tr>
+<tr>
+  <th>状态</th>
+  <td>
+    <input type="radio" name="status" id="status1" value="1" {if $row['status']==1}checked{/if}/>有效 &nbsp;
+    <input type="radio" name="status" id="status2" value="0" {if $row['status']==0}checked{/if}/>无效
+  </td>
+</tr>
+<tfoot>
+  <tr>
+  <td> </td>
+  <td>
+    <button type="button" class="btn btn-primary btn-sm" data-loading-text="<i class='icon-refresh icon-spin'></i> 执行中..." onclick="theForm.submit(this, 'form1', '');">提交保存</button>
+  </td>
+  </tr>
+</tfoot>
+</table>
+</form>
+</div>
+
+{subtemplate ajax/footer}

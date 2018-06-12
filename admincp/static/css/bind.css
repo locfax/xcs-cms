@@ -1,0 +1,82 @@
+
+/*-------------------------------------------------------------------------*/
+/*  band CSS 绑定页面样式 */
+/*-------------------------------------------------------------------------*/
+html, body { padding: 0; margin: 0; font-size:12px; color: #333; font-family: "Helvetica Neue",Helvetica,"Hiragino Sans GB","Microsoft Yahei",STHeiTi,sans-serif;}
+body, td, textarea, select { word-break: break-all;}
+h1 { margin: 10px 0 5px 0; font-size: 14px;}
+h2 { margin: 5px 0 5px 0; font-size: 14px;}
+li { list-style: none;}
+
+/* 当前的权限 */
+#thisuginfo {
+    margin-top: 15px;
+    width: 600px;
+    border: 1px #0aa;
+    padding: 10px 10px 10px 10px;
+    background: #FFF url(../img/inherit.gif) no-repeat top left
+}
+
+#thisuginfo td {
+    vertical-align: top;
+    padding: 10px;
+    border: 1px dashed #CCC;
+    width: 250px;
+}
+
+#thisuginfo h3 {
+    font-weight: bold;
+}
+
+#thisuginfo ul {
+    font-size: 12px;
+}
+
+#thisuginfo li {
+    margin: 0;
+    list-style: circle;
+}
+
+/* 全部Permissions */
+#allPermissions {
+    margin-top: 15px;
+    width: 600px;
+    border: 1px dashed #0aa;
+    padding: 10px 10px 10px 10px;
+}
+
+#allPermissions ul {
+    width: 600px;
+    float: left;
+    margin: 0;
+    padding: 0;
+}
+
+#allPermissions ul li {
+    width: 180px;
+    float: left;
+    margin: 0 5px 5px 0;
+}
+
+/* 表单样式 */
+div select, div input {
+    font-size: 12px;
+    border: 1px #aaa solid;
+    margin: 2px;
+}
+
+div input {
+    padding: 0 5px 0 5px;
+}
+
+div .ckbox {
+    border: 0
+}
+
+.OMover {
+    background-color: #FFFF99;
+}
+
+.Select {
+    background-color: #009966;
+}

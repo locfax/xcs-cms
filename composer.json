@@ -1,0 +1,11 @@
+{
+  "require": {
+    "locphp/xcs": "^7.10.33"
+  },
+  "repositories": {
+    "packagist": {
+      "type": "composer",
+      "url": "https://packagist.laravel-china.org"
+    }
+  }
+}

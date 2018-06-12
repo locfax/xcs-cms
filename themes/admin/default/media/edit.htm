@@ -1,0 +1,23 @@
+{subtemplate ajax/header}
+
+<div class="con_scoll">
+<form method="post" name="form1" id="form1" action="{$posturl}" class="form-horizontal" role="form">
+{if $row['isimage']}
+  <img src="{=image_url($row['filesite'],$row['filepath'])}" />
+  <br/><br/>
+  {$row['digest']}
+  <br/>
+  <input type="text" value="{=file_url($row['filesite'],$row['filepath'])}"  class="form-control" onclick="this.select()" style="width: 50%;" />
+  <br/>
+  <a href="{=file_url($row['filesite'],$row['filepath'])}" target="_blank" class="link">点击下载</a>
+{else}
+  {$row['digest']}
+  <br/><br/>
+  <input type="text" value="{=file_url($row['filesite'],$row['filepath'])}"  class="form-control" onclick="this.select()" style="width: 50%;" />
+  <br/>
+  <a href="{=file_url($row['filesite'],$row['filepath'])}" target="_blank" class="link">点击下载</a>
+{/if}
+</form>
+</div>
+
+{subtemplate ajax/footer}

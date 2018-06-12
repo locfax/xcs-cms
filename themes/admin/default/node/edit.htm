@@ -1,0 +1,43 @@
+{subtemplate ajax/header}
+
+<div class="con_scoll">
+<form method="post" name="form1" id="form1" action="{$posturl}" class="form-horizontal" role="form">
+<input name="tid" type="hidden" value="{$row['tid']}"/>
+<table class="table table-condensed">
+<tr>
+  <th width="50">标题</th>
+  <td><input name="subject" type="text" class="form-control" value="{$row['subject']}" data-tip="标题" data-type="string,1,60" style="width: 400px;" /></td>
+</tr>
+<tr>
+  <th>分类</th>
+  <td>
+    <select name="fid" class="form-control" style="width:200px;">
+      <option value="0" >请选择分类</option>
+      {echo $category->select_list($cats, $row['fid'], 0)}
+    </select>
+  </td>
+</tr>
+<tr>
+  <th>内容</th>
+  <td><textarea name="content" class="form-control richtext-clone" style="width:90%;" rows="30">{=stripslashes($row['content'])}</textarea></td>
+</tr>
+<tr>
+  <th>状态</th>
+  <td>
+    <input type="radio" name="status" id="status1" value="1" {if $row['status']==1}checked{/if}/>有效 &nbsp;
+    <input type="radio" name="status" id="status2" value="0" {if $row['status']==0}checked{/if}/>无效
+  </td>
+</tr>
+<tfoot>
+  <tr>
+  <td> </td>
+  <td>
+    <button type="button" class="btn btn-primary btn-sm" data-loading-text="<i class='icon-refresh icon-spin'></i> 执行中..." onclick="theForm.submit(this, 'form1', '', true);">提交保存</button>
+  </td>
+  </tr>
+</tfoot>
+</table>
+</form>
+</div>
+
+{subtemplate ajax/footer}

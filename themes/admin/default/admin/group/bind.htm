@@ -1,0 +1,53 @@
+{subtemplate ajax/header}
+<ol class="breadcrumb">
+  <li>组绑定角色 {$curgroup['group_name']}</li>
+</ol>
+
+<div class="con_scoll">
+<form id="form1" name="form1" action="{$posturl}" method="post" class="form-horizontal" role="form">
+<input type="hidden" name="group_id" value="{$curgroup['group_id']}"/>
+<table class="table table-condensed">
+  <tr>
+    <td>
+	  <div id="allPermissions">
+		<ul>
+		  {loop $roles $row1}
+		  <li role_id="{$row1['role_id']}">
+			<input name="role[{$row1['role_id']}]" type="checkbox" role_id="{$row1['role_id']}" id="role_{$row1['role_id']}" />
+			<label for="role_{$row1['role_id']}" role_id="{$row1['role_id']}">{$row1['role_text']}({$row1['role_name']})</label>
+		  </li>
+		  {/loop}
+		</ul>
+	  </div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <button type="button" class="btn btn-primary btn-sm" data-loading-text="<i class='icon-refresh icon-spin'></i> 执行中..." onclick="theForm.submit(this, 'form1', '', true);">提交保存</button>
+    </td>
+  </tr>
+</table>
+</form>
+</div>
+
+<script type="text/javascript">
+// 在网页载入时加载
+$(function () {
+  // 全部角色列表鼠标划过动作
+  $("#allRoles li, #allPermissions li, input:submit").hover(function () {
+      $(this).addClass("OMover");
+  }, function () {
+      $(this).removeClass("OMover");
+  });
+  _selectself();
+
+});
+
+function _selectself() {
+  {loop $curroles $row}
+  $("#allPermissions label[role_id='{$row['role_id']}']").click();
+  //$("#allPermissions li[role_id='{$row['role_id']}'] option[value='{$row['is_allow']}']").attr("selected","selected").click();
+  {/loop}
+}
+</script>
+{subtemplate ajax/footer}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8" />
+<title>body</title>
+{script script/header}
+</head>
+<body>
+<nav class="navbar-fixed-top">
+  <ol class="breadcrumb">
+    <li>系统管理 / 缓存管理</li>
+  </ol>
+</nav>
+
+<div class="wrap">
+
+  <form id="form1" name="form1" method="post" action="{url cache/reset}" class="form-horizontal" role="form">
+  <table class="table table-condensed">
+    <tbody>
+    <tr>
+      <td>文章分类</td>
+      <td><input name="resets[]" type="checkbox" class="checkbox" id="category" value="category" /></td>
+    </tr>
+    <tr>
+      <td><input name="Submit" type="submit" class="btn btn-default btn-sm" value=" 执行 " /></td>
+      <td> </td>
+    </tr>
+    </tbody>
+  </table>
+  </form>
+
+  <form action="{url cache/clear}" method="post" name="form2" id="form2" class="form-horizontal" role="form">
+  <table class="table table-condensed">
+    <tr>
+      <td width="150">模板缓存</td>
+      <td><input name="clear[]" type="checkbox" class="checkbox" id="clear" value="updatetpl" /></td>
+    </tr>
+    <tr>
+      <td><input name="submit2" type="submit" class="btn btn-default btn-sm" value=" 执行 " /></td>
+      <td> </td>
+    </tr>
+    </table>
+  </form>
+
+  <form action="{url cache/runtime}" method="post" name="form2" id="form2" class="form-horizontal" role="form">
+  <table class="table table-condensed">
+    <tr>
+      <td width="150">重置预加载</td>
+      <td><input name="clear[]" type="checkbox" class="checkbox" id="clear" value="runtime" /></td>
+    </tr>
+    <tr>
+      <td><input name="submit2" type="submit" class="btn btn-default btn-sm" value=" 执行 " /></td>
+      <td> </td>
+    </tr>
+    </table>
+  </form>
+
+</div>
+{script script/formpage}
+</body>
+</html>
