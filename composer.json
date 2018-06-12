@@ -1,11 +1,22 @@
 {
-  "require": {
-    "locphp/xcs": "^7.10.33"
-  },
-  "repositories": {
-    "packagist": {
-      "type": "composer",
-      "url": "https://packagist.laravel-china.org"
+  "name": "locphp/xcs-demo",
+  "description": "PHP Web Framework Xcs CMS",
+  "keywords": [
+    "framework",
+    "php",
+    "xcs"
+  ],
+  "homepage": "https://github.com/locphp/xcs-cms",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "ktang",
+      "email": "hellophp@qq.com",
+      "homepage": "https://github.com/locphp"
     }
+  ],
+  "require": {
+    "php": ">=5.4.0",
+    "locphp/xcs": "^7.10.45"
   }
 }
