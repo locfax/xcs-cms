@@ -18,6 +18,6 @@
   ],
   "require": {
     "php": ">=5.4.0",
-    "locphp/xcs": "^7.10.45"
+    "locphp/xcs": "^8.0.0"
   }
 }
